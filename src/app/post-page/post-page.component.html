@@ -1,22 +1,24 @@
-<div class="post">
-  <div class="header">
-    <h1>Post title</h1>
-    <button
-      routerLink="/"
-      class="btn btn-link"
-    >To Main</button>
-  </div>
+<div *ngIf="post$ | async as post; else loading">
+  <div class="post">
+    <div class="header">
+      <h1>{{ post.title }}</h1>
+      <button
+        routerLink="/"
+        class="btn btn-link"
+      >To Main</button>
+    </div>
 
-  <div class="info">
-    <strong>Here is author</strong>
-    <small>12.09.2020</small>
-  </div>
+    <div class="info">
+      <strong>{{ post.author }}</strong>
+      <small>{{ post.date | date:'medium':null:'ru' }}</small>
+    </div>
 
-  <div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad culpa cumque laborum provident suscipit ullam. Accusamus ad debitis error est in laudantium, non officiis quibusdam rerum saepe vitae voluptatem voluptatum? Adipisci consectetur distinctio dolorum illum ipsam itaque nam nesciunt officia quam sequi. Blanditiis cum deserunt eveniet, exercitationem natus odio vitae.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad culpa cumque laborum provident suscipit ullam. Accusamus ad debitis error est in laudantium, non officiis quibusdam rerum saepe vitae voluptatem voluptatum? Adipisci consectetur distinctio dolorum illum ipsam itaque nam nesciunt officia quam sequi. Blanditiis cum deserunt eveniet, exercitationem natus odio vitae.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad culpa cumque laborum provident suscipit ullam. Accusamus ad debitis error est in laudantium, non officiis quibusdam rerum saepe vitae voluptatem voluptatum? Adipisci consectetur distinctio dolorum illum ipsam itaque nam nesciunt officia quam sequi. Blanditiis cum deserunt eveniet, exercitationem natus odio vitae.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad culpa cumque laborum provident suscipit ullam. Accusamus ad debitis error est in laudantium, non officiis quibusdam rerum saepe vitae voluptatem voluptatum? Adipisci consectetur distinctio dolorum illum ipsam itaque nam nesciunt officia quam sequi. Blanditiis cum deserunt eveniet, exercitationem natus odio vitae.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad culpa cumque laborum provident suscipit ullam. Accusamus ad debitis error est in laudantium, non officiis quibusdam rerum saepe vitae voluptatem voluptatum? Adipisci consectetur distinctio dolorum illum ipsam itaque nam nesciunt officia quam sequi. Blanditiis cum deserunt eveniet, exercitationem natus odio vitae.</p>
+    <div>
+      <quill-view-html [content]="post.text"></quill-view-html>
+    </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <p class="text-center">Loading...</p>
+</ng-template>
